@@ -1,0 +1,766 @@
+/* Nullstill standardinnstillinger */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #1a1a1a;
+    --card-bg: #252525;
+    --text-main: #f0f0f0;
+    --text-muted: #aaaaaa;
+    --accent: #ffffff;
+    /* Silver/White */
+    --font-heading: 'Oswald', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+/* Navigasjon */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background-color: rgba(13, 13, 13, 0.9);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 120px;
+    width: auto;
+    filter: invert(1) brightness(2);
+    transition: all 0.3s ease;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 10px 20px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    letter-spacing: 2px;
+    position: relative;
+    background: transparent;
+}
+
+/* Corner lines */
+.nav-links a::before,
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--accent);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0.4;
+}
+
+/* Top-left corner */
+.nav-links a::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+/* Bottom-right corner */
+.nav-links a::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+    letter-spacing: 3px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-links a:hover::before,
+.nav-links a:hover::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+/* Hero Section - Robust Parallaks */
+.hero {
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    /* Holder bakgrunnen på plass */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../images/Forside.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallaks på PC */
+    z-index: -1;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+/* --- GLOBALE LAYOUT KLASSER --- */
+.container {
+    padding: 80px 5%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.page-header {
+    background-color: #111;
+    padding: 60px 5%;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.page-header h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Status boks (Åpen/Stengt) */
+#status-box {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-open {
+    border: 2px solid #2ecc71;
+    color: #2ecc71;
+}
+
+.status-closed {
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--accent);
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Tjenester og Priser */
+.price-category {
+    margin: 60px 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.category-icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--accent);
+    opacity: 0.9;
+}
+
+.price-category h2 {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    text-align: left;
+}
+
+.price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* Tighter gap for a list feel */
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    /* Align text exactly */
+    background-color: transparent;
+    padding: 15px 10px;
+    border-left: none;
+    /* Removed the heavy border */
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.price-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-left: 20px;
+}
+
+.service-info {
+    flex-shrink: 0;
+    max-width: 70%;
+}
+
+.service-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.service-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Den klassiske prikke-linjen */
+.price-connector {
+    flex-grow: 1;
+    border-bottom: 2px dotted rgba(255, 255, 255, 0.2);
+    margin: 0 15px;
+    height: 12px;
+    /* Juster for å treffe linjen perfekt */
+    transition: border-color 0.3s ease;
+}
+
+.price-item:hover .price-connector {
+    border-color: var(--accent);
+}
+
+.price {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent);
+    white-space: nowrap;
+    text-align: right;
+}
+
+/* Info Seksjon */
+.info-section {
+    background-color: #222;
+    text-align: center;
+}
+
+.info-grid {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.info-box h3 {
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+/* Mobil-tilpasning */
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .price-item {
+        flex-direction: column;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .price {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .info-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+/* --- PRODUKT SEKSJON --- */
+
+.products-section {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.products-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../images/Produkter.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+.products-overlay {
+    width: 100%;
+    padding: 100px 5%;
+}
+
+.products-brand {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.products-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Team Seksjon */
+.team-section {
+    background-color: #222;
+    padding: 80px 0;
+}
+
+/* Team Seksjon (Kollektivt) */
+.team-section {
+    background-color: #111;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.team-collective {
+    max-width: 900px;
+    margin: 40px auto 0;
+}
+
+.team-group-image {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--accent);
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.team-names {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.name-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.name-item strong {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.name-item span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* Hamburger Meny Toggle - Intuitivt og profesjonelt */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    align-items: center;
+    gap: 12px;
+    z-index: 1001;
+}
+
+.menu-label {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+.hamburger {
+    width: 25px;
+    height: 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 1px;
+    /* Tynnere, mer elegant linje */
+    background-color: var(--accent);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Midterste linje litt kortere for "designer touch" */
+.hamburger .bar:nth-child(2) {
+    width: 70%;
+    align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 5%;
+        background-color: #000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo img {
+        height: 45px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Animasjon til X */
+    #mobile-menu.is-active .hamburger .bar:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+
+    #mobile-menu.is-active .hamburger .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    #mobile-menu.is-active .hamburger .bar:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        transform: translateY(-100%);
+        /* Curtain effect */
+        opacity: 0;
+        transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.5s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Staggered entry */
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.4s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.5s;
+    }
+
+    .nav-links a {
+        font-family: var(--font-heading);
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+        padding: 10px;
+        border: none;
+    }
+
+    /* --- MOBIL BILDEOPTIMALISERING (Full-bleed) --- */
+    .hero {
+        height: 80vh;
+        background-attachment: fixed;
+        padding: 0 5%;
+        margin: 0;
+    }
+
+    .hero::before {
+        background-attachment: scroll;
+        /* Fallback for noen eldre mobiler */
+        /* Webkit-spesifikk fiks for mobil parallaks her hvis nødvendig */
+    }
+
+    .hero h1 {
+        font-size: 2.22rem;
+        /* Justert for å unngå brudd */
+        letter-spacing: 2px;
+        line-height: 1.2;
+    }
+
+    .products-section {
+        min-height: 85vh;
+        background-attachment: fixed;
+        padding: 100px 5%;
+        margin: 0;
+    }
+
+    .products-section::before {
+        background-attachment: scroll;
+    }
+
+    .products-section h2 {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .team-group-image {
+        height: 60vh;
+        /* Fyller mer av skjermen vertikalt */
+        width: 100vw;
+        margin-left: -5.5%;
+        /* Motvirker container padding for full-bleed */
+        border-left: none;
+        border-right: none;
+    }
+
+    .team-names {
+        gap: 40px;
+        padding: 0 5%;
+    }
+
+    section {
+        padding: 80px 0;
+        margin: 0;
+    }
+
+    .container {
+        padding: 0 5%;
+    }
+
+    /* --- MOBILE MENU CORNER BORDERS --- */
+    .nav-links a::before,
+    .nav-links a::after {
+        display: block !important;
+        width: 10px;
+        height: 10px;
+        opacity: 0.6;
+    }
+
+    .nav-links.active a::before,
+    .nav-links.active a::after {
+        animation: borderPulse 2s infinite ease-in-out;
+    }
+}
+
+@keyframes borderPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Lås rulling når menyen er åpen */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* HERO & PRODUKT PARALLAKS BASES */
+.hero::before,
+.products-section::before {
+    background-attachment: scroll !important;
+    /* JS overstyrer dette */
+    will-change: transform;
+    /* JS styrer denne variabelen for silkemyk effekt */
+    transform: translate3d(0, var(--parallax-y, 0), 0);
+}
+
+/* SMOOTH PAGE TRANSITIONS & PREMIUM ANIMATIONS */
+body {
+    animation: premiumFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes premiumFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+        /* Restore clinical zoom-in entry */
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Subtle Hero Entrance Fade */
+.hero::before {
+    animation: heroFade 1.5s ease-out forwards;
+}
+
+@keyframes heroFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Smoother interactions */
+.nav-links a,
+.cta-button,
+.price-item {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 600px) {
+    .price-item {
+        padding: 15px 5px;
+        gap: 10px;
+    }
+
+    .service-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .price-connector {
+        margin: 0 5px;
+        border-bottom-width: 1px;
+    }
+
+    .price {
+        font-size: 1.2rem;
+    }
+
+    .price-category h2 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+}
