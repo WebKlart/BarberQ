@@ -1,2 +1,0 @@
-# BarberQ
-Nettside til barberQ
