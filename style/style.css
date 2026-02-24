@@ -213,10 +213,12 @@ section:not(.hero):not(.products-section):not(.team-section) + section {
 
 .page-header h1 {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: clamp(3.1rem, 4.2vw, 4.2rem);
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 10px;
+    letter-spacing: 4px;
+    line-height: 1.1;
 }
 
 h2 {
@@ -283,7 +285,7 @@ h2 {
 
 .price-category h2 {
     margin-bottom: 0;
-    font-size: 1.8rem;
+    font-size: 2.8rem;
     letter-spacing: 4px;
     text-align: left;
 }
@@ -492,6 +494,7 @@ h2 {
 }
 
 .about-text h2 {
+    font-size: 2.8rem;
     text-align: center;
     margin-bottom: 40px;
 }
@@ -850,7 +853,7 @@ footer {
     }
 
     .price-category h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         letter-spacing: 1px;
     }
 
