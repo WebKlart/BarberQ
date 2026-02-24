@@ -1017,19 +1017,19 @@ footer {
     letter-spacing: 6px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     opacity: 0.9;
 }
 
 .products-section h2 {
-    font-size: 3.8rem;
-    margin-bottom: 25px;
+    font-size: 2.8rem;
+    margin-bottom: 30px;
     color: #fff;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 .products-section .section-intro {
