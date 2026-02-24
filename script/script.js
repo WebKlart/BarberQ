@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // checkStatus(); // Deaktivert da status-boksen er fjernet
-
     const menuToggle = document.querySelector('#mobile-menu');
     const navLinks = document.querySelector('#nav-links');
     const body = document.body;
@@ -386,9 +384,3 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(section);
     });
 });
-
-function checkStatus() {
-    /* 
-    Status-sjekk er deaktivert da elementene er fjernet fra forsiden.
-    */
-}
