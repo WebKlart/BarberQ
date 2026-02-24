@@ -8,19 +8,38 @@
     <meta name="keywords" content="frisør, herreklipp, tønsberg, drop-in, frisørsalong, skjeggtrim, fade">
     <meta name="author" content="BarberQ">
     <meta name="theme-color" content="#1a1a1a">
+    <meta name="color-scheme" content="dark">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://barberq.no/">
+    <link rel="alternate" hreflang="nb" href="https://barberq.no/">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="BarberQ Tønsberg - Kun Drop-in">
     <meta property="og:description" content="Profesjonell frisørsalong i Tønsberg. Ingen timebestilling, kun drop-in. Herreklipp, gutteklipp og skjeggtrim.">
-    <meta property="og:url" content="https://barberq.no">
+    <meta property="og:url" content="https://barberq.no/">
     <meta property="og:locale" content="nb_NO">
+    <meta property="og:image" content="https://barberq.no/images/BarberQLogoo.png">
+    <meta property="og:image:alt" content="BarberQ logo">
+    <meta property="og:site_name" content="BarberQ">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="BarberQ Tønsberg - Kun Drop-in">
+    <meta name="twitter:description" content="Profesjonell frisørsalong i Tønsberg. Ingen timebestilling, kun drop-in. Herreklipp, gutteklipp og skjeggtrim.">
+    <meta name="twitter:image" content="https://barberq.no/images/BarberQLogoo.png">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/BarberQLogoo.png">
+    <link rel="apple-touch-icon" href="images/BarberQLogoo.png">
     
     <title>BarberQ Tønsberg - Profesjonell Frisørsalong | Kun Drop-in</title>
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="images/Forside.jpg" fetchpriority="high">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap"
         rel="stylesheet">
     
@@ -30,9 +49,9 @@
       "@context": "https://schema.org",
       "@type": "HairSalon",
       "name": "BarberQ",
-      "image": "images/BarberQLogoo.png",
-      "@id": "",
-      "url": "https://barberq.no",
+      "image": "https://barberq.no/images/BarberQLogoo.png",
+      "@id": "https://barberq.no/",
+      "url": "https://barberq.no/",
       "telephone": "+47-123-45-678",
       "priceRange": "350-450 NOK",
       "address": {
@@ -61,7 +80,7 @@
 
     <nav role="navigation" aria-label="Hovednavigasjon">
         <div class="logo">
-            <a href="index.html"><img src="images/BarberQLogoo.png" alt="BarberQ Logo"></a>
+            <a href="index.html"><img src="images/BarberQLogoo.png" alt="BarberQ Logo" width="120" height="120" fetchpriority="high"></a>
         </div>
         <ul class="nav-links" id="nav-links">
             <li><a href="#hjem">Hjem</a></li>
@@ -70,14 +89,14 @@
             <li><a href="#teamet">Teamet</a></li>
             <li><a href="#finn-oss">Finn oss</a></li>
         </ul>
-        <div class="menu-toggle" id="mobile-menu">
+        <button class="menu-toggle" id="mobile-menu" aria-label="Åpne navigasjonsmeny" aria-expanded="false" aria-controls="nav-links" type="button">
             <span class="menu-label">MENY</span>
-            <div class="hamburger">
+            <div class="hamburger" aria-hidden="true">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-        </div>
+        </button>
     </nav>
 
     <header class="hero" id="hjem">
@@ -86,6 +105,8 @@
             <p class="subtitle">Ingen timebestilling. Kun Drop-in.</p>
         </div>
     </header>
+
+    <main>
 
     <section id="om-oss" class="container">
         <div class="about-grid">
@@ -136,7 +157,8 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                     <div class="team-carousel-track">
                         <!-- Team Member 1 -->
                         <div class="team-card">
-                            <div class="team-card-image-circle" style="background-image: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=400&fit=crop');">
+                            <div class="team-card-image-circle">
+                                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=400&fit=crop&fm=webp&q=80" alt="Marius – frisør" width="200" height="200" loading="lazy">
                             </div>
                             <div class="team-card-content">
                                 <h3>Marius</h3>
@@ -146,7 +168,8 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                         
                         <!-- Team Member 2 -->
                         <div class="team-card">
-                            <div class="team-card-image-circle" style="background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&h=400&fit=crop');">
+                            <div class="team-card-image-circle">
+                                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&h=400&fit=crop&fm=webp&q=80" alt="Lars – frisør" width="200" height="200" loading="lazy">
                             </div>
                             <div class="team-card-content">
                                 <h3>Lars</h3>
@@ -156,7 +179,8 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                         
                         <!-- Team Member 3 -->
                         <div class="team-card">
-                            <div class="team-card-image-circle" style="background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&h=400&fit=crop');">
+                            <div class="team-card-image-circle">
+                                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&h=400&fit=crop&fm=webp&q=80" alt="Eirik – frisør" width="200" height="200" loading="lazy">
                             </div>
                             <div class="team-card-content">
                                 <h3>Eirik</h3>
@@ -166,7 +190,8 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                         
                         <!-- Team Member 4 -->
                         <div class="team-card">
-                            <div class="team-card-image-circle" style="background-image: url('https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop');">
+                            <div class="team-card-image-circle">
+                                <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop&fm=webp&q=80" alt="Thomas – frisør" width="200" height="200" loading="lazy">
                             </div>
                             <div class="team-card-content">
                                 <h3>Thomas</h3>
@@ -225,6 +250,8 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
         </div>
     </section>
 
+    </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -281,7 +308,7 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
         </svg>
     </button>
 
-    <script src="script/script.js"></script>
+    <script src="script/script.js" defer></script>
 </body>
 
 </html>

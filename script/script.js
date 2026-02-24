@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('is-active');
+            const isActive = menuToggle.classList.toggle('is-active');
             navLinks.classList.toggle('active');
             body.classList.toggle('menu-open');
+            menuToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            menuToggle.setAttribute('aria-label', isActive ? 'Lukk navigasjonsmeny' : 'Åpne navigasjonsmeny');
         });
 
         // Lukk menyen når man trykker på en link
@@ -16,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuToggle.classList.remove('is-active');
                 navLinks.classList.remove('active');
                 body.classList.remove('menu-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.setAttribute('aria-label', 'Åpne navigasjonsmeny');
             });
         });
     }
@@ -260,31 +264,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- PREMIUM JS PARALLAX ENGINE ---
+    // --- PREMIUM PARALLAX ENGINE (scroll-driven, passive) ---
     const parallaxElements = document.querySelectorAll('.hero, .products-section');
 
     function updateParallax() {
-        const scrolled = window.pageYOffset;
-
         parallaxElements.forEach(el => {
-            const speed = 0.4; // Juster for "dybde"
             const rect = el.getBoundingClientRect();
-            const offset = rect.top;
-
-            // Vi regner bare ut hvis elementet er synlig på skjermen
-            if (offset < window.innerHeight && rect.bottom > 0) {
-                // Beregn forskyvning basert på hvor elementet er i viewporten
-                const yPos = -(offset * speed);
+            if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                const speed = 0.4;
+                const yPos = -(rect.top * speed);
                 el.style.setProperty('--parallax-y', `${yPos}px`);
             }
         });
-
-        requestAnimationFrame(updateParallax);
     }
 
-    // Start parallaks-motoren
     if (parallaxElements.length > 0) {
-        requestAnimationFrame(updateParallax);
+        window.addEventListener('scroll', updateParallax, { passive: true });
+        updateParallax();
     }
 
     // --- SCROLL TO TOP BUTTON ---
