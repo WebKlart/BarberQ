@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentTranslate = 0;
         let prevTranslate = 0;
 
+        const GAP = 20;
+
         // Responsive cards per view
         function updateCardsPerView() {
             if (window.innerWidth <= 600) {
@@ -52,10 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Set card widths explicitly in pixels so JS math is always accurate
+        function updateCardSizes() {
+            const carouselWidth = carousel.offsetWidth;
+            const cardWidth = (carouselWidth - GAP * (cardsPerView - 1)) / cardsPerView;
+            cards.forEach(card => {
+                card.style.flex = `0 0 ${cardWidth}px`;
+            });
+        }
+
         // Create dots
         function createDots() {
             dotsContainer.innerHTML = '';
-            const totalDots = Math.ceil(cards.length / cardsPerView);
+            const totalDots = cards.length - cardsPerView + 1;
             
             for (let i = 0; i < totalDots; i++) {
                 const dot = document.createElement('button');
@@ -82,13 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Move to slide
         function goToSlide(index) {
-            const maxIndex = Math.ceil(cards.length / cardsPerView) - 1;
+            const maxIndex = cards.length - cardsPerView;
             currentIndex = Math.max(0, Math.min(index, maxIndex));
             
             const cardWidth = cards[0].offsetWidth;
-            const gap = 35;
-            // Move one card at a time to show all team members
-            const offset = -(currentIndex * (cardWidth + gap));
+            const offset = -(currentIndex * (cardWidth + GAP));
             
             track.style.transform = `translateX(${offset}px)`;
             prevTranslate = offset;
@@ -97,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Next slide
         function nextSlide() {
-            const maxIndex = Math.ceil(cards.length / cardsPerView) - 1;
+            const maxIndex = cards.length - cardsPerView;
             if (currentIndex < maxIndex) {
                 goToSlide(currentIndex + 1);
             } else {
@@ -110,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex > 0) {
                 goToSlide(currentIndex - 1);
             } else {
-                goToSlide(Math.ceil(cards.length / cardsPerView) - 1);
+                goToSlide(cards.length - cardsPerView);
             }
         }
 
@@ -134,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Add resistance at edges
             const maxTranslate = 0;
-            const minTranslate = -(cards.length - cardsPerView) * (cards[0].offsetWidth + 35);
+            const minTranslate = -(cards.length - cardsPerView) * (cards[0].offsetWidth + GAP);
             
             if (currentTranslate > maxTranslate) {
                 currentTranslate = maxTranslate + (currentTranslate - maxTranslate) * 0.3;
@@ -154,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             track.style.transition = 'transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)';
             
-            if (movedBy < -threshold && currentIndex < Math.ceil(cards.length / cardsPerView) - 1) {
+            if (movedBy < -threshold && currentIndex < cards.length - cardsPerView) {
                 nextSlide();
             } else if (movedBy > threshold && currentIndex > 0) {
                 prevSlide();
@@ -162,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 goToSlide(currentIndex);
             }
             
-            prevTranslate = -(currentIndex * cardsPerView * (cards[0].offsetWidth + 35));
+            prevTranslate = -(currentIndex * (cards[0].offsetWidth + GAP));
             resetAutoplay();
         }
 
@@ -233,19 +242,19 @@ document.addEventListener('DOMContentLoaded', () => {
             resizeTimeout = setTimeout(() => {
                 const oldCardsPerView = cardsPerView;
                 updateCardsPerView();
+                updateCardSizes();
                 
                 if (oldCardsPerView !== cardsPerView) {
                     currentIndex = 0;
                     createDots();
-                    goToSlide(0);
-                } else {
-                    goToSlide(currentIndex);
                 }
+                goToSlide(currentIndex);
             }, 250);
         });
 
         // Initialize
         updateCardsPerView();
+        updateCardSizes();
         createDots();
         goToSlide(0);
         startAutoplay();
