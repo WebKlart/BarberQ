@@ -9,7 +9,7 @@ html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     /* Prevent font scaling in landscape */
-    scroll-padding-top: 140px; /* Account for sticky nav */
+    scroll-padding-top: 0;
 }
 
 :root {
@@ -52,11 +52,19 @@ nav {
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+    transition: padding 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+nav.scrolled {
+    padding: 7px 5%;
+    background-color: rgba(6, 6, 6, 0.98);
+    box-shadow: 0 2px 32px rgba(0, 0, 0, 0.75);
 }
 
 .logo {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .logo img {
@@ -68,6 +76,20 @@ nav {
 
 .logo img:hover {
     transform: scale(1.05);
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover .logo-text {
+    opacity: 0.8;
 }
 
 .nav-links {
@@ -129,11 +151,11 @@ nav {
     opacity: 1;
 }
 
-/* Hero Section - Robust Parallaks */
+/* Hero Section */
 .hero {
     position: relative;
-    height: 90vh;
-    min-height: 600px;
+    height: 75vh;
+    min-height: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,13 +170,17 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('../images/Forside.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    filter: contrast(1.05) brightness(1.02);
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.25) 0%,
+            rgba(0, 0, 0, 0.35) 60%,
+            rgba(26, 26, 26, 0.85) 88%,
+            #1a1a1a 100%
+        ),
+        url('../images/Forside.jpg') center / cover no-repeat;
+    background-attachment: scroll;
+    transform: none;
     z-index: -1;
 }
 
@@ -165,23 +191,35 @@ nav {
 
 .hero h1 {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: 5.5rem;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     color: #fff;
-    letter-spacing: 4px;
-    font-weight: 700;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: 14px;
+    font-weight: 400;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
 .subtitle {
-    font-size: 1.4rem;
-    color: #e0e0e0;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-    font-weight: 300;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 28px;
+    letter-spacing: 3.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: none;
 }
+
+/* --- HERO ENTRANCE ANIMATIONS --- */
+@keyframes heroSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content h1       { animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+.hero-content .subtitle { animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both; }
+.hero-content #status-box { animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+.hero-content .cta-button { animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both; }
 
 /* --- GLOBALE LAYOUT KLASSER --- */
 .container {
@@ -208,23 +246,37 @@ section:not(.hero):not(.products-section):not(.team-section) + section {
 h2 {
     font-family: var(--font-heading);
     text-align: center;
-    font-size: 2.8rem;
+    font-size: 1.85rem;
     color: var(--accent);
-    margin-bottom: 60px;
+    margin-bottom: 44px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 700;
+    letter-spacing: 7px;
+    font-weight: 400;
+    padding-bottom: 18px;
+    position: relative;
+}
+
+h2:not(.footer-title)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 /* Status boks (Åpen/Stengt) */
 #status-box {
     display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-bottom: 30px;
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 0.72rem;
+    margin-bottom: 28px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2.5px;
 }
 
 .status-open {
@@ -245,11 +297,36 @@ h2 {
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
-    transition: background 0.3s;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, letter-spacing 0.3s, transform 0.2s;
+}
+
+/* Shimmer sweep */
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+    transform: skewX(-18deg);
+}
+
+.cta-button:hover::after {
+    animation: ctaShimmer 0.55s ease-out forwards;
 }
 
 .cta-button:hover {
-    background-color: #e0e0e0;
+    background-color: #e8e8e8;
+    letter-spacing: 3px;
+    transform: translateY(-1px);
+}
+
+@keyframes ctaShimmer {
+    to { left: 150%; }
 }
 
 
@@ -266,18 +343,25 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    background-color: rgba(255, 255, 255, 0.03);
-    padding: 28px 35px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    background: none;
+    padding: 22px 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0;
+    transition: opacity 0.3s ease;
     position: relative;
 }
 
+.price-item:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Staggered entrance */
+.price-item.animate-on-scroll:nth-child(1) { transition-delay: 0.05s; }
+.price-item.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+
 .price-item:hover {
-    background-color: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.18);
-    transform: translateX(6px);
+    opacity: 0.75;
 }
 
 .service-info {
@@ -304,14 +388,13 @@ h2 {
 /* Den klassiske prikke-linjen */
 .price-connector {
     flex-grow: 1;
-    border-bottom: 2px dotted rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin: 0 20px;
     height: 12px;
-    transition: border-color 0.3s ease;
 }
 
 .price-item:hover .price-connector {
-    border-color: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .price {
@@ -457,78 +540,103 @@ h2 {
 }
 
 .about-text h2 {
-    font-size: 2.8rem;
+    font-size: 1.85rem;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
 }
 
 .about-text p {
-    margin-bottom: 25px;
-    line-height: 1.9;
-    font-size: 1.08rem;
-    color: var(--text-main);
+    margin-bottom: 20px;
+    line-height: 1.95;
+    font-size: 1rem;
+    color: var(--text-muted);
     text-align: center;
-    max-width: 800px;
+    max-width: 620px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* Footer */
 footer {
-    background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
-    color: #888;
-    padding: 60px 5% 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, #171717 0%, #0d0d0d 100%);
+    color: #7f7f7f;
+    padding: 60px 5% 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.footer-inner {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-family: var(--font-heading);
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 2.15rem;
+    font-weight: 400;
+    margin-bottom: 28px;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
+    grid-template-columns: repeat(3, minmax(0, 220px));
+    justify-content: center;
+    gap: 22px;
+    margin: 0 auto 22px;
     text-align: center;
+    align-items: start;
+}
+
+.footer-section {
+    max-width: 220px;
+    margin: 0 auto;
 }
 
 .footer-section h4 {
     font-family: var(--font-heading);
-    color: var(--accent);
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
+    letter-spacing: 1.2px;
+    font-weight: 400;
+    margin-bottom: 10px;
 }
 
 .footer-section p {
-    color: #aaa;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: #8d8d8d;
+    margin-bottom: 5px;
+    font-size: 0.88rem;
+    line-height: 1.5;
 }
 
 .social-links {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
 }
 
 .social-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    color: #aaa;
+    gap: 8px;
+    color: #9a9a9a;
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 8px 15px;
+    padding: 8px 14px;
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
 .social-link:hover {
-    color: var(--accent);
-    background-color: rgba(255, 255, 255, 0.08);
-    transform: translateX(5px);
+    color: rgba(255, 255, 255, 0.92);
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: none;
 }
 
 .social-link svg {
@@ -538,8 +646,16 @@ footer {
 }
 
 .social-link span {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 400;
+}
+
+.social-note {
+    max-width: 220px;
+    margin: 10px auto 0;
+    color: #7c7c7c;
+    font-size: 0.82rem;
+    line-height: 1.5;
 }
 
 .footer-link {
@@ -555,10 +671,10 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.85rem;
-    color: #666;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.78rem;
+    color: #5f5f5f;
 }
 
 .footer-bottom p {
@@ -686,17 +802,6 @@ footer {
 
 /* Mobil-tilpasning */
 @media (max-width: 600px) {
-    .hero::before {
-        background-attachment: scroll !important;
-        background-position: center 40% !important;
-        background-size: 140% !important;
-        filter: none !important;
-        image-rendering: auto !important;
-        transform: none !important;
-        will-change: auto !important;
-        animation: none !important;
-    }
-
     .products-section::before {
         background-attachment: scroll !important;
         background-position: center !important;
@@ -719,14 +824,14 @@ footer {
     }
 
     h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         letter-spacing: 2px;
-        margin-bottom: 40px;
+        margin-bottom: 18px;
     }
 
 
     .container {
-        padding: 70px 5%;
+        padding: clamp(22px, 5vh, 40px) 5%;
     }
 
     .price-list {
@@ -737,9 +842,12 @@ footer {
         flex-direction: column;
         text-align: left;
         align-items: flex-start;
-        padding: 24px 20px;
-        gap: 12px;
-        border-radius: 6px;
+        padding: 16px 0;
+        gap: 6px;
+    }
+
+    .price-connector {
+        display: none;
     }
 
     .service-info {
@@ -819,20 +927,20 @@ footer {
     }
 
     .team-carousel-container {
-        padding: 0 40px 50px;
+        padding: 0 40px 30px;
     }
 
     .team-card {
         flex: 0 0 100%;
         max-width: 100%;
-        padding: 35px 25px 30px;
+        padding: 24px 20px 20px;
         margin: 0 auto;
     }
 
     .team-card-image-circle {
-        width: 180px;
-        height: 180px;
-        margin-bottom: 20px;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 14px;
     }
 
     .team-card-content h3 {
@@ -876,20 +984,21 @@ footer {
     }
 
     .about-text h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 18px;
     }
 
     .about-text p {
-        font-size: 1rem;
-        line-height: 1.8;
+        font-size: 0.95rem;
+        line-height: 1.75;
         text-align: center;
         padding: 0 5px;
+        margin-bottom: 14px;
     }
 
     .info-section p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
     .info-note {
@@ -901,21 +1010,45 @@ footer {
     }
 
     footer {
-        padding: 50px 20px 25px;
+        padding: 28px 20px 16px;
+    }
+
+    .footer-inner {
+        max-width: 360px;
+    }
+
+    .footer-title {
+        font-size: 1.85rem;
+        letter-spacing: 1.8px;
+        margin-bottom: 22px;
     }
 
     .footer-content {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 18px;
         text-align: center;
     }
 
+    .footer-section {
+        max-width: 100%;
+    }
+
     .footer-section h4 {
-        font-size: 1rem;
+        font-size: 0.88rem;
     }
 
     .footer-section p {
-        font-size: 0.9rem;
+        font-size: 0.86rem;
+    }
+
+    .social-link {
+        justify-content: center;
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .social-note {
+        max-width: 220px;
     }
 
     .scroll-to-top {
@@ -1034,8 +1167,6 @@ footer {
 
 .team-section-heading h2 {
     color: var(--accent);
-    font-size: 3.2rem;
-    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 .team-carousel-container {
@@ -1084,9 +1215,9 @@ footer {
 }
 
 .team-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .team-card-image-circle {
@@ -1124,9 +1255,9 @@ footer {
 }
 
 .team-card:hover .team-card-image-circle {
-    transform: scale(1.05);
+    transform: scale(1.06);
     border-color: var(--accent);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 255, 255, 0.1);
 }
 
 .team-card-content {
@@ -1302,10 +1433,6 @@ footer {
         padding: 90px 5% 55px;
     }
 
-    .team-section-heading h2 {
-        font-size: 2.5rem;
-    }
-
     .team-carousel-container {
         padding: 0 60px 70px;
     }
@@ -1370,13 +1497,26 @@ footer {
         padding: 25px;
     }
 
-    .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 35px;
+    .footer-inner {
+        max-width: 700px;
     }
-    
+
+    .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 220px));
+        justify-content: center;
+        gap: 20px;
+    }
+
     .footer-section:last-child {
         grid-column: 1 / -1;
+    }
+
+    .footer-title {
+        font-size: 2rem;
+    }
+
+    .social-link {
+        justify-content: center;
     }
 }
 
@@ -1391,6 +1531,11 @@ footer {
 
     .logo img {
         height: 45px;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+        letter-spacing: 3px;
     }
 
     .menu-toggle {
@@ -1472,32 +1617,32 @@ footer {
 
     /* --- MOBIL BILDEOPTIMALISERING (Full-bleed) --- */
     .hero {
-        height: 75vh;
-        min-height: 500px;
-        background-attachment: scroll;
-        padding: 0 5%;
+        height: calc(100vw * 629 / 1080); /* Tilpasser seg bildeforholdet til Forsidemobil.jpg (1080×629) — ingen zoom */
+        min-height: 0;
+        padding: 0;
         margin: 0;
     }
 
+    .hero-content {
+        display: none;
+    }
+
     .hero::before {
-        background-attachment: scroll !important;
-        background-position: center 40% !important;
-        background-size: 140% !important;
-        filter: none !important;
-        image-rendering: auto !important;
-        transform: none !important;
-        will-change: auto !important;
-        animation: none !important;
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.15) 0%,
+                rgba(0, 0, 0, 0.25) 55%,
+                rgba(26, 26, 26, 0.80) 82%,
+                #1a1a1a 100%
+            ),
+            url('../images/Forsidemobil.jpg') center / cover no-repeat;
+        background-attachment: scroll;
     }
 
     .hero h1 {
-        font-size: 2.5rem;
-        letter-spacing: 2px;
-        line-height: 1.2;
-    }
-
-    .subtitle {
-        font-size: 1.1rem;
+        font-size: 3rem;
+        letter-spacing: 6px;
     }
 
     .products-section {
@@ -1532,11 +1677,7 @@ footer {
     }
 
     .team-section-heading {
-        padding: 80px 5% 40px;
-    }
-
-    .team-section-heading h2 {
-        font-size: 2rem;
+        padding: clamp(22px, 5vh, 40px) 5% clamp(14px, 3vh, 28px);
     }
 
     .team-carousel-container {
@@ -1583,16 +1724,16 @@ footer {
     }
 
     section {
-        padding: 70px 0;
+        padding: clamp(22px, 5vh, 40px) 0;
         margin: 0;
     }
 
     .container {
-        padding: 70px 6%;
+        padding: clamp(22px, 5vh, 40px) 6%;
     }
 
     .info-section {
-        padding: 70px 0;
+        padding: clamp(22px, 5vh, 40px) 0;
     }
 
     .info-single-box {
@@ -1626,7 +1767,7 @@ footer {
 
     h2 {
         font-size: 1.8rem;
-        margin-bottom: 30px;
+        margin-bottom: clamp(14px, 3vh, 28px);
     }
 
     .section-intro {
@@ -1668,8 +1809,7 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* HERO & PRODUKT PARALLAKS BASES */
-.hero::before,
+/* PRODUKT PARALLAKS BASE */
 .products-section::before {
     background-attachment: scroll !important;
     /* JS overstyrer dette */
@@ -1678,22 +1818,14 @@ body.menu-open {
     transform: translate3d(0, var(--parallax-y, 0), 0);
 }
 
-/* SMOOTH PAGE TRANSITIONS & PREMIUM ANIMATIONS */
+/* SMOOTH PAGE TRANSITIONS — opacity only, no scale (scale causes CLS) */
 body {
-    animation: premiumFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: premiumFadeIn 0.6s ease forwards;
 }
 
 @keyframes premiumFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(1.05);
-        /* Restore clinical zoom-in entry */
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 /* Subtle Hero Entrance Fade */
@@ -1820,8 +1952,7 @@ a:focus-visible {
     }
     
     .team-card,
-    .info-box,
-    .price-item {
+    .info-box {
         border-width: 2px;
     }
 }
@@ -1830,4 +1961,25 @@ a:focus-visible {
 .fade-in-up {
     opacity: 1 !important;
     transform: translateY(0) !important;
+}
+
+/* CSS-driven scroll animation — avoids CLS from JS inline styles */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

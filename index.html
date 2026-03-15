@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 
 <head>
@@ -13,48 +13,52 @@
     <link rel="canonical" href="https://barberq.no/">
     <link rel="alternate" hreflang="nb" href="https://barberq.no/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-    <link rel="icon" type="image/png" href="images/BarberQLogoo.png">
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="BarberQ Tønsberg - Kun Drop-in">
     <meta property="og:description" content="Profesjonell frisørsalong i Tønsberg. Ingen timebestilling, kun drop-in. Herreklipp, gutteklipp og skjeggtrim.">
     <meta property="og:url" content="https://barberq.no/">
     <meta property="og:locale" content="nb_NO">
-    <meta property="og:image" content="https://barberq.no/images/BarberQLogoo.png">
-    <meta property="og:image:alt" content="BarberQ logo">
+    <meta property="og:image" content="https://barberq.no/images/Forside.jpg">
+    <meta property="og:image:alt" content="BarberQ frisørsalong Tønsberg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="BarberQ">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BarberQ Tønsberg - Kun Drop-in">
     <meta name="twitter:description" content="Profesjonell frisørsalong i Tønsberg. Ingen timebestilling, kun drop-in. Herreklipp, gutteklipp og skjeggtrim.">
-    <meta name="twitter:image" content="https://barberq.no/images/BarberQLogoo.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/BarberQLogoo.png">
-    <link rel="apple-touch-icon" href="images/BarberQLogoo.png">
-    
+    <meta name="twitter:image" content="https://barberq.no/images/Forside.jpg">
+
+    <!-- Favicon (SVG inline — no extra HTTP request) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text x='50%' y='78%' text-anchor='middle' font-size='68' font-family='Arial,sans-serif' font-weight='bold' fill='white'>B</text></svg>">
+    <link rel="apple-touch-icon" href="images/Forside.jpg">
+
     <title>BarberQ Tønsberg - Profesjonell Frisørsalong | Kun Drop-in</title>
+
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="images/Forside.jpg" fetchpriority="high">
+
     <link rel="stylesheet" href="style/style.css">
+
+    <!-- Google Fonts: non-render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap"
-        rel="stylesheet">
-    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet"></noscript>
+
     <!-- Schema.org markup for Local Business -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HairSalon",
       "name": "BarberQ",
-      "image": "https://barberq.no/images/BarberQLogoo.png",
+      "image": "https://barberq.no/images/Forside.jpg",
       "@id": "https://barberq.no/",
       "url": "https://barberq.no/",
-      "telephone": "+47-123-45-678",
-      "priceRange": "350-450 NOK",
+      "priceRange": "620-655 NOK",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Jernbanegaten 1D",
@@ -70,41 +74,17 @@
           "closes": "20:00"
         }
       ],
-      "sameAs": []
+      "sameAs": [
+        "https://www.facebook.com/BarberQ.Farmandstredet/"
+      ]
     }
     </script>
 </head>
 
 <body>
-    <!-- Skip to main content for accessibility -->
-    <a href="#hjem" class="skip-to-main">Hopp til hovedinnhold</a>
-
-    <nav role="navigation" aria-label="Hovednavigasjon">
-        <div class="logo">
-            <a href="index.html"><img src="images/BarberQLogoo.png" alt="BarberQ Logo" width="120" height="120" fetchpriority="high"></a>
-        </div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#hjem">Hjem</a></li>
-            <li><a href="#om-oss">Om oss</a></li>
-            <li><a href="#priser">Priser</a></li>
-            <li><a href="#teamet">Teamet</a></li>
-            <li><a href="#finn-oss">Finn oss</a></li>
-        </ul>
-        <button class="menu-toggle" id="mobile-menu" aria-label="Åpne navigasjonsmeny" aria-expanded="false" aria-controls="nav-links" type="button">
-            <span class="menu-label">MENY</span>
-            <div class="hamburger" aria-hidden="true">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </button>
-    </nav>
 
     <header class="hero" id="hjem">
-        <div class="hero-content">
-            <h1>Klipp deg når det passer</h1>
-            <p class="subtitle">Ingen timebestilling. Kun Drop-in.</p>
-        </div>
+        <div class="hero-content">        </div>
     </header>
 
     <main>
@@ -113,31 +93,31 @@
         <div class="about-grid">
             <div class="about-text">
                 <h2>Om oss</h2>
-                <p>Midt på Farmandstredet i Tønsberg finner du BarberQ – en herresalong med fokus på kvalitet og helhet.
-
-Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blikk for detaljer. Hos BarberQ får hver kunde en personlig opplevelse, der klipp og styling tilpasses individuelt. BarberQ representerer en oppdatert og profesjonell tilnærming til herreklipp, tilpasset dagens stil og standard, samtidig som det legges vekt på en hyggelig og avslappet atmosfære. Enten du ønsker en klassisk eller moderne frisyre, sørger teamet for at resultatet blir presist, stilig og holdbart.</p>
+                <p>Midt på Farmandstredet i Tønsberg finner du BarberQ – en herresalong med fokus på kvalitet og helhet.</p>
+                <p>Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blikk for detaljer. Hos BarberQ får hver kunde en personlig opplevelse, der klipp og styling tilpasses individuelt.</p>
+                <p>BarberQ representerer en oppdatert og profesjonell tilnærming til herreklipp, tilpasset dagens stil og standard, samtidig som det legges vekt på en hyggelig og avslappet atmosfære. Enten du ønsker en klassisk eller moderne frisyre, sørger teamet for at resultatet blir presist, stilig og holdbart.</p>
             </div>
         </div>
     </section>
 
     <section id="priser" class="container">
-        <h2>Tjenester & Priser</h2>
-        
+        <h2>Priser</h2>
+
         <div class="price-list">
-            <div class="price-item">
+            <div class="price-item animate-on-scroll">
                 <div class="service-info">
                     <h3>Herreklipp</h3>
-                    <p>Klassisk klipp og styling</p>
+                    <p>Klassisk klipp</p>
                 </div>
-                <div class="price-connector"></div>
+                <div class="price-connector" aria-hidden="true"></div>
                 <div class="price">655,-</div>
             </div>
-            <div class="price-item">
+            <div class="price-item animate-on-scroll">
                 <div class="service-info">
                     <h3>Gutteklipp</h3>
                     <p>Under 12 år</p>
                 </div>
-                <div class="price-connector"></div>
+                <div class="price-connector" aria-hidden="true"></div>
                 <div class="price">620,-</div>
             </div>
         </div>
@@ -149,15 +129,14 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
         </div>
 
         <div class="team-carousel-container">
-                <button class="carousel-nav carousel-prev" aria-label="Forrige">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button class="carousel-nav carousel-prev" aria-label="Forrige frisør">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
-                
-                <div class="team-carousel">
+
+                <div class="team-carousel" role="region" aria-label="Frisør-karusell">
                     <div class="team-carousel-track">
-                        <!-- Team Member 1 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -166,8 +145,6 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                                 <h3>Sofia</h3>
                             </div>
                         </div>
-                        
-                        <!-- Team Member 2 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -176,18 +153,14 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                                 <h3>Emma</h3>
                             </div>
                         </div>
-                        
-                        <!-- Team Member 3 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             </div>
                             <div class="team-card-content">
-                                 <h3>Ingrid</h3>
+                                <h3>Ingrid</h3>
                             </div>
                         </div>
-                        
-                        <!-- Team Member 4 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -196,8 +169,6 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                                 <h3>Maja</h3>
                             </div>
                         </div>
-
-                        <!-- Team Member 5 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -206,8 +177,6 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                                 <h3>Nora</h3>
                             </div>
                         </div>
-
-                        <!-- Team Member 6 -->
                         <div class="team-card">
                             <div class="team-card-image-circle team-card-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -218,94 +187,56 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
                         </div>
                     </div>
                 </div>
-                
-                <button class="carousel-nav carousel-next" aria-label="Neste">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+                <button class="carousel-nav carousel-next" aria-label="Neste frisør">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
-                
-                <div class="carousel-dots"></div>
-            </div>
-    </section>
 
-    <section id="produkter" class="products-section">
-        <div class="products-overlay">
-            <div class="container">
-                <p class="products-brand">Sortiment</p>
-                <h2>Vi har ulike produkter for alle</h2>
-                <p class="section-intro">Produkter for å holde stilen.</p>
+                <div class="carousel-dots" role="tablist" aria-label="Karusell-navigasjon"></div>
             </div>
-        </div>
-    </section>
-
-    <section id="finn-oss" class="info-section">
-        <div class="container">
-            <h2>Besøk oss</h2>
-            <p class="section-intro">Velkommen innom oss for en hyggelig frisørtime. Ta gjerne en kaffe mens du venter - vi gleder oss til å
-                fikse håret ditt!</p>
-            <div class="info-single-box">
-                <div class="info-content">
-                    <div class="info-item">
-                        <h3>Åpningstider</h3>
-                        <p><strong>Man - Lør:</strong> 10:00 - 20:00</p>
-                        <p><strong>Søndag:</strong> Stengt</p>
-                        <p class="info-note">Kun drop-in, ingen timebestilling</p>
-                    </div>
-                    <div class="info-divider"></div>
-                    <div class="info-item">
-                        <h3>Adresse</h3>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Jernbanegaten+1D,+3110+Tønsberg"
-                            target="_blank" rel="noopener noreferrer" class="info-address">
-                            <p>Jernbanegaten 1D</p>
-                            <p>3110 Tønsberg</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>BarberQ Tønsberg</h4>
-                <p>Profesjonell frisørsalong</p>
-                <p>Kun drop-in - ingen timebestilling</p>
-            </div>
-            <div class="footer-section">
-                <h4>Besøk oss</h4>
-                <p>Jernbanegaten 1D</p>
-                <p>3110 Tønsberg</p>
-                <p>Man-Lør: 10:00-20:00</p>
-            </div>
-            <div class="footer-section">
-                <h4>Våre sosiale</h4>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/barberq_farmandstredet/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                        <span>Instagram</span>
+        <div class="footer-inner">
+            <h2 class="footer-title">Besøk oss</h2>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BarberQ Tønsberg</h4>
+                    <p>Profesjonell frisørsalong</p>
+                    <p>Kun drop-in - ingen timebestilling</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Åpningstider & adresse</h4>
+                    <p>Man-Lør: 10:00–20:00</p>
+                    <p>Søndag: Stengt</p>
+                    <a href="https://maps.google.com/?q=Jernbanegaten+1D,+3110+Tønsberg" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Åpne adresse i Google Maps">
+                        <p>Jernbanegaten 1D</p>
+                        <p>3110 Tønsberg</p>
                     </a>
-                    <a href="https://www.facebook.com/BarberQ.Farmandstredet/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                        <span>Facebook</span>
-                    </a>
+                </div>
+                <div class="footer-section">
+                    <h4>Facebook</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/BarberQ.Farmandstredet/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Følg BarberQ på Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                            <span>Følg oss på Facebook</span>
+                        </a>
+                    </div>
+                    <p class="social-note">Vi deler nyheter, bilder og oppdateringer fra salongen på Facebook.</p>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 BarberQ. Alle rettigheter reservert.</p>
-            <p class="footer-credit">Design & utvikling av 
+            <p class="footer-credit">Design & utvikling av
                 <a href="https://webklart.no" target="_blank" rel="noopener noreferrer" class="webklart-link">
-                    <svg class="rocket-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="rocket-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
                         <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
                         <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
@@ -319,7 +250,7 @@ Salongen kjennetegnes av moderne omgivelser, effektiv service og et tydelig blik
 
     <!-- Scroll to top button -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Rull til toppen">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>

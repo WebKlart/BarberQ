@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- NAV SCROLL SHRINK ---
+    const navEl = document.querySelector('nav');
+    if (navEl) {
+        window.addEventListener('scroll', () => {
+            navEl.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+    }
+
     const menuToggle = document.querySelector('#mobile-menu');
     const navLinks = document.querySelector('#nav-links');
     const body = document.body;
@@ -367,6 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- SCROLL ANIMATIONS ---
+    // Sections use the CSS class .animate-on-scroll for initial hidden state.
+    // JS only adds .fade-in-up when element enters viewport — no inline styles = no CLS.
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -381,11 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe sections for scroll animations
-    document.querySelectorAll('section:not(.hero):not(.team-section)').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        scrollObserver.observe(section);
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        scrollObserver.observe(el);
     });
 });
