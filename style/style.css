@@ -15,9 +15,16 @@ html {
 :root {
     --bg-color: #1a1a1a;
     --card-bg: #252525;
+    --card-bg-light: #2a2a2a;
     --text-main: #f0f0f0;
     --text-muted: #aaaaaa;
     --accent: #ffffff;
+    --blue-accent: #4169e1;
+    --blue-subtle: rgba(65, 105, 225, 0.15);
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-fast: 0.3s;
+    --dur-mid: 0.45s;
+    --dur-slow: 0.7s;
     /* Silver/White */
     --font-heading: 'Oswald', sans-serif;
     --font-body: 'Roboto', sans-serif;
@@ -51,14 +58,14 @@ nav {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
-    transition: padding 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: padding var(--dur-mid) var(--ease-smooth), background-color var(--dur-mid) var(--ease-smooth), box-shadow var(--dur-mid) var(--ease-smooth);
 }
 
 nav.scrolled {
     padding: 7px 5%;
     background-color: rgba(6, 6, 6, 0.98);
-    box-shadow: 0 2px 32px rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
@@ -71,7 +78,7 @@ nav.scrolled {
     height: 120px;
     width: auto;
     filter: invert(1) brightness(2);
-    transition: all 0.3s ease;
+    transition: transform var(--dur-fast) var(--ease-smooth), filter var(--dur-fast) var(--ease-smooth);
 }
 
 .logo img:hover {
@@ -104,7 +111,7 @@ nav.scrolled {
     text-transform: uppercase;
     font-size: 0.78rem;
     padding: 11px 22px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: color var(--dur-mid) var(--ease-smooth), letter-spacing var(--dur-mid) var(--ease-smooth), background-color var(--dur-mid) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth);
     letter-spacing: 2px;
     position: relative;
     background: transparent;
@@ -117,8 +124,8 @@ nav.scrolled {
     position: absolute;
     width: 6px;
     height: 6px;
-    border: 1px solid var(--accent);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgba(65, 105, 225, 0.4);
+    transition: width var(--dur-mid) var(--ease-smooth), height var(--dur-mid) var(--ease-smooth), opacity var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth);
     opacity: 0.35;
 }
 
@@ -141,7 +148,8 @@ nav.scrolled {
 .nav-links a:hover {
     color: var(--accent);
     letter-spacing: 3px;
-    background-color: rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    transform: translateY(-1px);
 }
 
 .nav-links a:hover::before,
@@ -149,6 +157,7 @@ nav.scrolled {
     width: 100%;
     height: 100%;
     opacity: 1;
+    border-color: rgba(65, 105, 225, 0.6);
 }
 
 /* Hero Section */
@@ -170,19 +179,34 @@ nav.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.25) 0%,
-            rgba(0, 0, 0, 0.35) 60%,
-            rgba(26, 26, 26, 0.85) 88%,
-            #1a1a1a 100%
-        ),
-        url('../images/Forside.jpg') center / cover no-repeat;
+    background-image: image-set(url('../images/Forside.jpg') 1x, url('../images/Forside.jpg') 2x);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: scroll;
-    transform: none;
-    z-index: -1;
+    image-rendering: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    z-index: -2;
 }
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.12) 68%,
+        rgba(12, 12, 12, 0.42) 84%,
+        rgba(26, 26, 26, 0.72) 94%,
+        #1a1a1a 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hero layers are static to avoid visible gradient/fade artifacts */
 
 .hero-content {
     max-width: 900px;
@@ -227,6 +251,15 @@ nav.scrolled {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 /* Add spacing between major sections */
@@ -254,9 +287,11 @@ h2 {
     font-weight: 400;
     padding-bottom: 18px;
     position: relative;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-h2:not(.footer-title)::after {
+/* Default underline for h2 */
+h2::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -264,7 +299,7 @@ h2:not(.footer-title)::after {
     transform: translateX(-50%);
     width: 30px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(90deg, transparent, var(--blue-accent), transparent);
 }
 
 /* Status boks (Åpen/Stengt) */
@@ -277,22 +312,26 @@ h2:not(.footer-title)::after {
     margin-bottom: 28px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
+    backdrop-filter: blur(8px);
+    position: relative;
 }
 
 .status-open {
-    border: 2px solid #2ecc71;
-    color: #2ecc71;
+    border: 2px solid var(--blue-accent);
+    color: var(--blue-accent);
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(65, 105, 225, 0.05));
 }
 
 .status-closed {
     border: 2px solid #e74c3c;
     color: #e74c3c;
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.08), rgba(231, 76, 60, 0.04));
 }
 
 .cta-button {
     display: inline-block;
     padding: 12px 30px;
-    background-color: var(--accent);
+    background: linear-gradient(135deg, #ffffff, #f5f5f5);
     color: #000;
     text-decoration: none;
     font-weight: bold;
@@ -300,7 +339,8 @@ h2:not(.footer-title)::after {
     letter-spacing: 2px;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s, letter-spacing 0.3s, transform 0.2s;
+    transition: background-color var(--dur-fast) var(--ease-smooth), letter-spacing var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-fast) var(--ease-smooth);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Shimmer sweep */
@@ -320,9 +360,10 @@ h2:not(.footer-title)::after {
 }
 
 .cta-button:hover {
-    background-color: #e8e8e8;
+    background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
     letter-spacing: 3px;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes ctaShimmer {
@@ -337,18 +378,19 @@ h2:not(.footer-title)::after {
     max-width: 750px;
     margin: 0 auto;
     text-align: left;
+    position: relative;
 }
 
 .price-item {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    background: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
     padding: 22px 0;
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
     position: relative;
 }
 
@@ -361,7 +403,10 @@ h2:not(.footer-title)::after {
 .price-item.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
 
 .price-item:hover {
-    opacity: 0.75;
+    opacity: 0.85;
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.04), rgba(65, 105, 225, 0.01));
+    transform: translateX(4px);
+    border-bottom-color: rgba(65, 105, 225, 0.12);
 }
 
 .service-info {
@@ -376,6 +421,7 @@ h2:not(.footer-title)::after {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-main);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .service-info p {
@@ -405,6 +451,8 @@ h2:not(.footer-title)::after {
     white-space: nowrap;
     text-align: right;
     letter-spacing: 0.5px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
 }
 
 /* Info Seksjon */
@@ -493,16 +541,17 @@ h2:not(.footer-title)::after {
     flex: 1;
     min-width: 280px;
     padding: 35px 30px;
-    background-color: var(--card-bg);
+    background: linear-gradient(135deg, var(--card-bg-light), var(--card-bg));
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    transition: all 0.3s ease;
+    transition: transform var(--dur-fast) var(--ease-smooth), border-color var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-mid) var(--ease-smooth);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .info-box:hover {
     transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(65, 105, 225, 0.3);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(65, 105, 225, 0.15);
 }
 
 .info-box h3 {
@@ -533,6 +582,7 @@ h2:not(.footer-title)::after {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
 }
 
 .about-text {
@@ -554,6 +604,7 @@ h2:not(.footer-title)::after {
     max-width: 620px;
     margin-left: auto;
     margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */
@@ -562,6 +613,9 @@ footer {
     color: #7f7f7f;
     padding: 60px 5% 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
 .footer-inner {
@@ -625,18 +679,19 @@ footer {
     gap: 8px;
     color: #9a9a9a;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: color var(--dur-fast) var(--ease-smooth), background-color var(--dur-fast) var(--ease-smooth), border-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-fast) var(--ease-smooth);
     padding: 8px 14px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    background-color: rgba(255, 255, 255, 0.02);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
 }
 
 .social-link:hover {
     color: rgba(255, 255, 255, 0.92);
-    background-color: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
-    transform: none;
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.12), rgba(65, 105, 225, 0.06));
+    border-color: rgba(65, 105, 225, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .social-link svg {
@@ -661,12 +716,13 @@ footer {
 .footer-link {
     color: #aaa;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
     display: inline-block;
 }
 
 .footer-link:hover {
     color: var(--accent);
+    transform: translateY(-1px);
 }
 
 .footer-bottom {
@@ -691,7 +747,7 @@ footer {
     color: #555;
     text-decoration: none;
     font-weight: 400;
-    transition: all 0.3s ease;
+    transition: color var(--dur-fast) var(--ease-smooth);
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -707,7 +763,7 @@ footer {
     width: 14px;
     height: 14px;
     stroke: #10b981;
-    transition: all 0.3s ease;
+    transition: transform var(--dur-fast) var(--ease-smooth), stroke var(--dur-fast) var(--ease-smooth);
     flex-shrink: 0;
 }
 
@@ -743,8 +799,8 @@ footer {
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.2), rgba(65, 105, 225, 0.12));
+    border: 2px solid rgba(65, 105, 225, 0.4);
     border-radius: 50%;
     color: var(--accent);
     cursor: pointer;
@@ -754,9 +810,9 @@ footer {
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity var(--dur-mid) var(--ease-smooth), visibility var(--dur-mid) var(--ease-smooth), transform var(--dur-mid) var(--ease-smooth), background-color var(--dur-mid) var(--ease-smooth), color var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth), box-shadow var(--dur-mid) var(--ease-smooth);
     z-index: 999;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
 }
 
@@ -767,11 +823,11 @@ footer {
 }
 
 .scroll-to-top:hover {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, var(--blue-accent), #3355cc);
+    color: #fff;
+    border-color: var(--blue-accent);
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .info-note {
@@ -1130,6 +1186,8 @@ footer {
     padding: 0;
     text-align: center;
     position: relative;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+    overflow: hidden;
 }
 
 .team-section::before {
@@ -1140,6 +1198,7 @@ footer {
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    z-index: 1;
 }
 
 .team-section h2 {
@@ -1163,6 +1222,8 @@ footer {
 .team-section-heading {
     text-align: center;
     padding: 120px 5% 70px;
+    position: relative;
+    z-index: 2;
 }
 
 .team-section-heading h2 {
@@ -1174,6 +1235,7 @@ footer {
     width: 100%;
     padding: 0 70px 80px;
     box-sizing: border-box;
+    z-index: 2;
 }
 
 .team-carousel {
@@ -1184,9 +1246,10 @@ footer {
 
 .team-carousel-track {
     display: flex;
-    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform var(--dur-slow) var(--ease-smooth);
     gap: 20px;
     cursor: grab;
+    will-change: transform;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1199,13 +1262,13 @@ footer {
 
 .team-card {
     flex: 0 0 calc(33.333% - 14px);
-    background: #252525;
+    background: linear-gradient(135deg, #2a2a2a, #252525);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     overflow: visible;
-    transition: all 0.3s ease;
+    transition: transform var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth), box-shadow var(--dur-mid) var(--ease-smooth), background var(--dur-mid) var(--ease-smooth);
     padding: 28px 20px 24px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
     position: relative;
     min-height: 0;
     display: flex;
@@ -1216,8 +1279,9 @@ footer {
 
 .team-card:hover {
     transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.22);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border-color: rgba(65, 105, 225, 0.35);
+    background: linear-gradient(135deg, #2d2d2d, #282828);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(65, 105, 225, 0.2);
 }
 
 .team-card-image-circle {
@@ -1226,15 +1290,15 @@ footer {
     border-radius: 50%;
     margin: 0 auto 18px;
     border: 3px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: transform var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth), box-shadow var(--dur-mid) var(--ease-smooth);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
 }
 
 .team-card-placeholder {
-    background: #2e2e2e;
+    background: linear-gradient(135deg, #333333, #2a2a2a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1256,8 +1320,8 @@ footer {
 
 .team-card:hover .team-card-image-circle {
     transform: scale(1.06);
-    border-color: var(--accent);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 255, 255, 0.1);
+    border-color: rgba(65, 105, 225, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .team-card-content {
@@ -1284,7 +1348,7 @@ footer {
     transform: translateX(-50%);
     width: 40px;
     height: 2px;
-    background: var(--accent);
+    background: linear-gradient(90deg, transparent, var(--blue-accent), transparent);
     transition: width 0.3s ease;
 }
 
@@ -1310,27 +1374,28 @@ footer {
     position: absolute;
     top: calc(50% - 54px);
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.15), rgba(65, 105, 225, 0.08));
+    border: 2px solid rgba(65, 105, 225, 0.3);
     color: var(--accent);
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color var(--dur-fast) var(--ease-smooth), color var(--dur-fast) var(--ease-smooth), border-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-fast) var(--ease-smooth);
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
 }
 
 .carousel-nav:hover {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--blue-accent), #3355cc);
+    color: #fff;
+    border-color: var(--blue-accent);
     transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-prev {
@@ -1356,22 +1421,22 @@ footer {
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.35);
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width var(--dur-mid) var(--ease-smooth), height var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth), background-color var(--dur-mid) var(--ease-smooth);
     padding: 0;
     position: relative;
 }
 
 .carousel-dot:hover {
-    border-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(65, 105, 225, 0.6);
     height: 4px;
 }
 
 .carousel-dot.active {
     width: 40px;
     height: 3px;
-    background-color: #ffffff;
-    border-color: #ffffff;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(90deg, var(--blue-accent), #5b82ff);
+    border-color: var(--blue-accent);
+    transition: width var(--dur-mid) var(--ease-smooth), height var(--dur-mid) var(--ease-smooth), border-color var(--dur-mid) var(--ease-smooth), background-color var(--dur-mid) var(--ease-smooth);
 }
 
 /* Hamburger Meny Toggle - Intuitivt og profesjonelt */
@@ -1410,7 +1475,7 @@ footer {
     height: 1px;
     /* Tynnere, mer elegant linje */
     background-color: var(--accent);
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform var(--dur-mid) var(--ease-smooth), opacity var(--dur-mid) var(--ease-smooth), width var(--dur-mid) var(--ease-smooth);
 }
 
 /* Midterste linje litt kortere for "designer touch" */
@@ -1570,7 +1635,7 @@ footer {
         transform: translateY(-100%);
         /* Curtain effect */
         opacity: 0;
-        transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform var(--dur-slow) var(--ease-smooth), opacity var(--dur-slow) var(--ease-smooth);
         z-index: 1000;
     }
 
@@ -1582,7 +1647,7 @@ footer {
     .nav-links li {
         opacity: 0;
         transform: scale(0.9);
-        transition: all 0.5s ease;
+        transition: opacity var(--dur-mid) var(--ease-smooth), transform var(--dur-mid) var(--ease-smooth);
     }
 
     .nav-links.active li {
@@ -1628,16 +1693,22 @@ footer {
     }
 
     .hero::before {
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.15) 0%,
-                rgba(0, 0, 0, 0.25) 55%,
-                rgba(26, 26, 26, 0.80) 82%,
-                #1a1a1a 100%
-            ),
-            url('../images/Forsidemobil.jpg') center / cover no-repeat;
+        background-image: image-set(url('../images/Forsidemobil.jpg') 1x, url('../images/Forsidemobil.jpg') 2x);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         background-attachment: scroll;
+    }
+
+    .hero::after {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.06) 0%,
+            rgba(0, 0, 0, 0.1) 66%,
+            rgba(14, 14, 14, 0.36) 82%,
+            rgba(26, 26, 26, 0.66) 94%,
+            #1a1a1a 100%
+        );
     }
 
     .hero h1 {
@@ -1782,6 +1853,7 @@ footer {
         width: 10px;
         height: 10px;
         opacity: 0.6;
+        border-color: rgba(65, 105, 225, 0.6) !important;
     }
 
     .nav-links.active a::before,
@@ -1828,26 +1900,11 @@ body {
     to   { opacity: 1; }
 }
 
-/* Subtle Hero Entrance Fade */
-.hero::before {
-    animation: heroFade 1.5s ease-out forwards;
-}
-
-@keyframes heroFade {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 /* Smoother interactions */
 .nav-links a,
 .cta-button,
 .price-item {
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-timing-function: var(--ease-smooth);
 }
 
 /* --- MOBILE ENHANCEMENTS --- */
@@ -1880,7 +1937,7 @@ body {
 /* Improve click/tap feedback */
 button:active,
 a:active {
-    transform: scale(0.95);
+    transform: scale(0.985);
 }
 
 /* Prevent text selection during carousel drag */

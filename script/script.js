@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let prevTranslate = 0;
 
         const GAP = 20;
+        const TRACK_TRANSITION = 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1)';
 
         // Responsive cards per view
         function updateCardsPerView() {
@@ -169,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const movedBy = currentTranslate - prevTranslate;
             const threshold = 50;
             
-            track.style.transition = 'transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)';
+            track.style.transition = TRACK_TRANSITION;
             
             if (movedBy < -threshold && currentIndex < cards.length - cardsPerView) {
                 nextSlide();
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         track.addEventListener('mouseleave', () => {
             if (isDragging) {
                 isDragging = false;
-                track.style.transition = 'transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)';
+                track.style.transition = TRACK_TRANSITION;
                 goToSlide(currentIndex);
             }
         });
