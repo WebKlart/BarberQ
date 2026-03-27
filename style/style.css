@@ -809,7 +809,7 @@ footer {
     text-align: center;
     padding-top: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     color: #444;
 }
 
@@ -818,7 +818,7 @@ footer {
 }
 
 .footer-credit {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     color: #444;
     margin-top: 6px;
 }
